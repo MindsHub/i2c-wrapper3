@@ -41,32 +41,9 @@ void setup() {
 
 
 /*
-bool i2c_write_comand(unsigned char reg, unsigned char val){
-	//printf("%d %d\n",reg, val);
-	if(reg<I2C_BUF_SIZE){
-		unsigned char buf[4];
-		buf[0]=reg;
-		buf[1]=val;
-		buf[2]=buf[0]+buf[1];
-		for(int a=0; a<10; a++){
-			if(i2c_send(buf)==buf[1])
-				return true;
-		}
-	}
-	i2c_saveError((char *)"failed write\n");
-	return false;
-}
 
-unsigned char i2c_read_comand(unsigned char reg){
-	if(reg<I2C_BUF_SIZE){
-		unsigned char buf[4];
-		buf[0]=I2C_BUF_SIZE;
-		buf[1]=reg;
-		buf[2]=buf[0]+buf[1];
-		return i2c_send(buf);
-	}
-	return 0;
-}
+
+
 
 unsigned char i2c_read_output(unsigned char reg){
 	if(reg<I2C_BUF_SIZE){
@@ -79,25 +56,6 @@ unsigned char i2c_read_output(unsigned char reg){
 	return 0;
 }
 
-bool i2c_write_status(unsigned char val){
-	unsigned char buf[4];
-	buf[0]=I2C_BUF_SIZE+2;
-	buf[1]=val;
-	buf[2]=buf[0]+buf[1];
-	for(int a=0; a<10; a++){
-		if(i2c_send(buf)==val)
-			return true;
-	}
-	return false;
-}
-
-unsigned char i2c_read_status(){
-	unsigned char buf[4];
-	buf[0]=I2C_BUF_SIZE+3;
-	buf[1]=0;
-	buf[2]=buf[0]+buf[1];
-	return i2c_send(buf);
-}
 
 void i2c_delivery(unsigned char* data, unsigned char size){
 	int i=0;

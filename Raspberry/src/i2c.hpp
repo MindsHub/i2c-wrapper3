@@ -36,14 +36,24 @@ class i2c_device{
 			this->addr=addr;
 			setup(inp);
 		}
-		unsigned char readData();
-		unsigned char sendData(unsigned char *buf);
+		void delivery(unsigned char* data, unsigned char size);
 	private:
 		int file_i2c;
 		unsigned char addr;
-		unsigned char i2c_inBuffer[10];
-		unsigned char i2c_read=0;
+		unsigned char inBuffer[10];
+		unsigned char outBuffer[4];
+		unsigned char readed=0; //lo so che è sbagliato, ma rende l'idea e non da problemi con la f read
+		
 		bool isValid();
+		
+		unsigned char readData();
+		unsigned char sendData();
+		
+		bool writeComand(unsigned char reg, unsigned char val);
+		unsigned char readComand(unsigned char reg);
+		bool writeStatus(unsigned char val);
+		unsigned char readStatus();
+		
 		void setup(i2c_controller inp);
 		
 };
