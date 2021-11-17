@@ -15,9 +15,30 @@ void move(i2c_device dev, int32_t pos){
 	dev.delivery(buf, 5);
 }
 
+void sum(i2c_device dev, int32_t x, int32_t y){
+	printf("%d+%d=",x,y);
+	unsigned char buf[9];
+	unsigned char* out;
+	buf[0]='S';
+	memcpy(buf+1,&x, 4);
+	memcpy(buf+5,&y, 4);
+	int32_t somma=x+y;
+	unsigned char size=dev.delivery(buf, 9, &out);
+	if(size==4){
+		memcpy(&x,out, 4);
+		printf("%d %d\n",x, ++count);
+		if(somma!=x){
+			printf("erroraccio\n");
+			exit(-1);
+		}
+	}
+}
+
 int main(){
-	i2c_controller contr;
-	i2c_device asseX(contr, 0x10);
+	srand(time(NULL));
+	//i2c_controller contr;
+	
+	i2c_device asseX(I2C_CONTROLLER, 0x10);
 	//unsigned char test[3];
 	//asseX.writeComand(0, 2);
 	//asseX.readComand(0);
@@ -26,6 +47,11 @@ int main(){
 		move((int32_t)rand()%(200*32));
 		usleep(1000000);
 	}*/
-	move(asseX, 1000);
+	for(int a=0;a<5000;a++){
+			
+		//sum(asseX, rand()%100, rand()%100);
+		move(asseX, rand()%(200*32));
+		//usleep(10000);
+	}
 	//i2c_write_comand(0, 'M');
 }

@@ -7,5 +7,6 @@ void i2c_controller::setup(){
 		i2c_saveError((char *)"Error opening i2c");
 		exit(-1);
 	}
+	usleep(1000);
 }
 
