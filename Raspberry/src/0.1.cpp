@@ -47,11 +47,12 @@ int main(){
 		move((int32_t)rand()%(200*32));
 		usleep(1000000);
 	}*/
-	for(int a=0;a<5000;a++){
+	move(asseX, 1000);
+	/*for(int a=0;a<5000;a++){
 			
 		//sum(asseX, rand()%100, rand()%100);
 		move(asseX, rand()%(200*32));
 		//usleep(10000);
-	}
+	}*/
 	//i2c_write_comand(0, 'M');
 }
